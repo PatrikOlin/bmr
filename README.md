@@ -1,6 +1,7 @@
 # bspwm mark register
 
 sxhkdrc:
+```
 #
 # bspwm mark register
 #
@@ -12,3 +13,4 @@ super + shift + {u, i, o, p}
 # focus marked window
 super + {u, i, o, p}
    bmr mark -focus {u, i, o, p}
+```
