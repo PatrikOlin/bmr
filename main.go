@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/gob"
 	"encoding/json"
 	"flag"
@@ -43,10 +44,16 @@ func main() {
 		if *focusMark != "" {
 			nodeID := register[*focusMark]
 			cmd := exec.Command("bspc", "node", "-f", nodeID)
+			var out bytes.Buffer
+			var stderr bytes.Buffer
+			cmd.Stdout = &out
+			cmd.Stderr = &stderr
 			err := cmd.Run()
 			if err != nil {
-				log.Fatalln("Error running command", err)
+				fmt.Println(fmt.Sprint(err) + ": " + stderr.String())
+				return
 			}
+			fmt.Println("Result: " + out.String())
 		}
 
 	case "reg":
